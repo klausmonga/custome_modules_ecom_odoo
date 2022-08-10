@@ -38,7 +38,7 @@ class ProductTemplate(models.Model):
                         rec.is_extra_price = True
                     else:
                         rec.is_extra_price = False
-                   
+                rec.is_extra_price = False
 
 
 
