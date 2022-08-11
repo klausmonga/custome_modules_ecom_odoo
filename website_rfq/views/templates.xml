@@ -458,7 +458,7 @@
                                     <div><b>Project :</b><span t-esc='request.env.user.partner_id.project' class="address-inline"/></div>
                                     <div><b>Email :</b><span t-esc='request.env.user.partner_id.email' class="address-inline"/></div>
                                     <div><b>Phone :</b><span t-esc='request.env.user.partner_id.phone' class="address-inline"/></div>
-                                    <div><b>Address :</b><span t-esc='request.env.user.partner_id.contact_address_complete' /></div>
+<!--                                    <div><b>Address :</b><span t-esc='request.env.user.partner_id.contact_address_complete' /></div>-->
                                 </div>
                             </div>
                             <br/>
@@ -500,7 +500,7 @@
                                     <div><b>Project :</b><span t-esc='request.env.user.partner_id.project' class="address-inline"/></div>
                                     <div><b>Email :</b><span t-esc='request.env.user.partner_id.email' class="address-inline"/></div>
                                     <div><b>Phone :</b><span t-esc='request.env.user.partner_id.phone' class="address-inline"/></div>
-                                    <div><b>Address :</b><span t-esc='request.env.user.partner_id.contact_address_complete' /></div>
+<!--                                    <div><b>Address :</b><span t-esc='request.env.user.partner_id.contact_address_complete' /></div>-->
                                 </div>
                             </div>
                             <br/>
