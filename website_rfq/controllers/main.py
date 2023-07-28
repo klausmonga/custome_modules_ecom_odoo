@@ -9,6 +9,14 @@ from odoo.addons.website_sale.controllers.main import WebsiteSale
 
 class WebsiteSale(WebsiteSale):
 
+	def _get_mandatory_fields_billing(self, country_id=False):
+		req = ["name", "email"]
+		return req
+
+	def _get_mandatory_fields_shipping(self, country_id=False):
+		req = ["name", "email"]
+		return req
+
 	@http.route()
 	def products_autocomplete(self, term, options={}, **kwargs):
 
@@ -138,6 +146,14 @@ class OdooWebsiteProductQuote(http.Controller):
 
   #   def _get_mandatory_billing_fields(self):
   #       return ["name", "email", "street", "city", "country_id"]
+
+	def _get_mandatory_fields_billing(self, country_id=False):
+		req = ["name", "email"]
+		return req
+
+	def _get_mandatory_fields_shipping(self, country_id=False):
+		req = ["name", "email"]
+		return req
 
 	@http.route(['/process/quote/nonlogin'], type='http', auth="public", website=True)
 	def get_quote_nonlogin(self, **post):

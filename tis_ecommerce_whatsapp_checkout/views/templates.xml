@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="cart_inherit_whatsapp_checkout" inherit_id="website_sale.cart"
+              name="Shopping Cart with WhatsApp Checkout">
+        <xpath expr="//div[hasclass('oe_cart')]" position="inside">
+            <t t-if="whatsapp_checkout_user == 'login_users'">
+                <p class="alert alert-danger" t-if="error and not user_id._is_public() and website.whatsapp_check_out"
+                   role="alert">
+                    <t t-esc="error"/>
+                </p>
+            </t>
+            <t t-else="">
+                <p class="alert alert-danger" t-if="error and website.whatsapp_check_out" role="alert">
+                    <t t-esc="error"/>
+                </p>
+            </t>
+        </xpath>
+        <xpath expr="//div[hasclass('oe_cart')]/div/div/a[2]" position="replace">
+            <t t-if="website.whatsapp_check_out">
+                <span name="mobile_number" type="hidden" t-att-value="mobile_number"/>
+                <span name="message_string" type="hidden" t-att-value="message_string"/>
+                <span name="whatsapp_checkout_user" type="hidden" t-att-value="whatsapp_checkout_user"/>
+                <t t-if="whatsapp_checkout_user == 'login_users' and not user_id._is_public()">
+                    <!--            <t t-if="whatsapp_checkout_user == 'login_users'">-->
+                    <a role="button"
+                       t-if="website_sale_order and website_sale_order.website_order_line and not user_id._is_public()"
+                       class="btn  float-right d-none d-lg-block whatsapp_checkout" target="_blank"
+                       style="background-color:#04d46d;color: white;"
+                       href="/shop/whatsapp_checkout">
+                        <span class="fa fa-whatsapp"/>
+                        <span class="">WhatsApp Checkout</span>
+                    </a>
+                </t>
+
+                <t t-elif="whatsapp_checkout_user == 'public_users' and user_id._is_public()">
+                    <!--            <t t-if="whatsapp_checkout_user == 'login_users'">-->
+                    <a role="button"
+                       t-if="website_sale_order and website_sale_order.website_order_line and user_id._is_public()"
+                       class="btn  float-right d-none d-lg-block whatsapp_checkout" target="_blank"
+                       style="background-color:#04d46d;color: white;"
+                       href="/shop/whatsapp_checkout">
+                        <span class="fa fa-whatsapp"/>
+                        <span class="">WhatsApp Checkout</span>
+                    </a>
+                </t>
+
+                <t t-else="">
+                    <a role="button" t-if="website_sale_order and website_sale_order.website_order_line"
+                       class="btn btn-primary float-right d-none d-xl-inline-block whatsapp_checkout"
+                       href="/shop/checkout?express=1">
+                        <span class="">Process Checkout</span>
+                        <span class="fa fa-chevron-right"/>
+                    </a>
+                </t>
+            </t>
+            <t t-else="">
+                <a role="button" t-if="website_sale_order and website_sale_order.website_order_line"
+                   class="btn btn-primary float-right d-none d-xl-inline-block" href="/shop/checkout?express=1">
+                    <span class="">Process Checkout</span>
+                    <span class="fa fa-chevron-right"/>
+                </a>
+            </t>
+        </xpath>
+        <xpath expr="//div[@id='o_cart_summary']/div" position="replace">
+            <div class="d-xl-none mt8">
+                <a role="button" href="/shop" class="btn btn-secondary mb32">
+                    <span class="fa fa-chevron-left"/>
+                    Continue
+                    <span class="d-none d-md-inline">Shopping</span>
+                </a>
+                <t t-if="website.whatsapp_check_out">
+                    <span name="mobile_number" type="hidden" t-att-value="mobile_number"/>
+                    <span name="message_string" type="hidden" t-att-value="message_string"/>
+                    <span name="whatsapp_checkout_user" type="hidden" t-att-value="whatsapp_checkout_user"/>
+                    <t t-if="whatsapp_checkout_user == 'login_users' and not user_id._is_public()">
+                        <!--            <t t-if="whatsapp_checkout_user == 'login_users'">-->
+                        <a role="button"
+                           t-if="website_sale_order and website_sale_order.website_order_line and not user_id._is_public()"
+                           class="btn  float-right d-block d-lg-none whatsapp_checkout" target="_blank"
+                           style="background-color:#04d46d;color: white;"
+                           href="/shop/whatsapp_checkout">
+                            <span class="fa fa-whatsapp"/>
+                            <span class="">WhatsApp Checkout</span>
+                        </a>
+                    </t>
+
+                    <t t-elif="whatsapp_checkout_user == 'public_users' and user_id._is_public()">
+                        <!--            <t t-if="whatsapp_checkout_user == 'login_users'">-->
+                        <a role="button"
+                           t-if="website_sale_order and website_sale_order.website_order_line and user_id._is_public()"
+                           class="btn  float-right d-block d-lg-none whatsapp_checkout" target="_blank"
+                           style="background-color:#04d46d;color: white;"
+                           href="/shop/whatsapp_checkout">
+                            <span class="fa fa-whatsapp"/>
+                            <span class="">WhatsApp Checkout</span>
+                        </a>
+                    </t>
+
+                    <t t-else="">
+                        <a role="button" t-if="website_sale_order and website_sale_order.website_order_line"
+                           class="btn btn-primary float-right d-none d-xl-inline-block whatsapp_checkout"
+                           href="/shop/checkout?express=1">
+                            <span class="">Process Checkout</span>
+                            <span class="fa fa-chevron-right"/>
+                        </a>
+                    </t>
+                </t>
+                <t t-else="">
+                    <a role="button" t-if="website_sale_order and website_sale_order.website_order_line"
+                       class="btn btn-primary float-right d-none d-xl-inline-block" href="/shop/checkout?express=1">
+                        <span class="">Process Checkout</span>
+                        <span class="fa fa-chevron-right"/>
+                    </a>
+                </t>
+            </div>
+        </xpath>
+        <!--<xpath expr="//div[@id='o_cart_summary']/div/a[2]" position="replace">
+            <t t-if="website.whatsapp_check_out">
+                <t t-if="whatsapp_checkout_user == 'login_users' and not user_id._is_public()">
+                    <a role="button"
+                       t-if="website_sale_order and website_sale_order.website_order_line and not user_id._is_public()"
+                       class="btn btn-primary float-right whatsapp_checkout" href="/shop/whatsapp_checkout/api"
+                       target="_blank"
+                       style="background-color:#04d46d;color: white;">
+                        <span class="fa fa-whatsapp"/>
+                        <span class="">WhatsApp Checkout</span>
+                    </a>
+                </t>
+
+                <t t-elif="whatsapp_checkout_user == 'public_users' and user_id._is_public()">
+                    <a role="button"
+                       t-if="website_sale_order and website_sale_order.website_order_line and not user_id._is_public()"
+                       class="btn btn-primary float-right whatsapp_checkout" href="/shop/whatsapp_checkout/api"
+                       target="_blank"
+                       style="background-color:#04d46d;color: white;">
+                        <span class="fa fa-whatsapp"/>
+                        <span class="">WhatsApp Checkout</span>
+                    </a>
+                </t>
+
+                <t t-else="">
+                    <a role="button" t-if="website_sale_order and website_sale_order.website_order_line"
+                       class="btn btn-primary float-right whatsapp_checkout" href="/shop/checkout?express=1">
+                        <span class="">Process Checkout</span>
+                        <span class="fa fa-chevron-right"/>
+                    </a>
+                </t>
+            </t>
+            <t t-else="">
+                <a role="button" t-if="website_sale_order and website_sale_order.website_order_line"
+                   class="btn btn-primary float-right" href="/shop/checkout?express=1">
+                    <span class="">Process Checkout</span>
+                    <span class="fa fa-chevron-right"/>
+                </a>
+            </t>
+        </xpath>-->
+    </template>
+    <template inherit_id="website_sale.short_cart_summary" id="short_cart_summary_whatsapp_checkout_inherit"
+              name="Short Cart right column WhatsappCheckout">
+        <xpath expr="//div[hasclass('card-body')]/div/a[1]" position="attributes">
+            <attribute name="style">visibility:hidden;</attribute>
+        </xpath>
+    </template>
+</odoo>

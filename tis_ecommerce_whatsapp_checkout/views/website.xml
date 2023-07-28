@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_website_form_inherited" model="ir.ui.view">
+        <field name="name">website.form.inherited</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='domain']" position="after">
+                  <field name="whatsapp_number"/>
+                  <field name="whatsapp_check_out"/>
+             </xpath>
+        </field>
+    </record>
+     <record id="view_website_tree_inherited" model="ir.ui.view">
+        <field name="name">website.tree.inherited</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_tree"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='country_group_ids']" position="after">
+                 <field name="whatsapp_number"/>
+             </xpath>
+        </field>
+     </record>
+</odoo>
