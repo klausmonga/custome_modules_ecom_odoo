@@ -19,13 +19,13 @@ class WebsiteSale(WebsiteSale):
             'tis_ecommerce_whatsapp_checkout.whatsapp_number')
         if not mobile_num:
             return request.redirect('/shop/cart')
-        message_string = 'Hi, I would like to buy the following products.%0a%0a'
+        message_string = 'Bonjour, je souhaite acheter les produits suivants.%0a%0a'
         for order_line in order.order_line:
             print("dataaaaaaaaaa")
             message_string = message_string + '%20' + str(order_line.product_uom_qty) + '%20X%20' + str(
                 order_line.product_id.display_name) + '%0a'
-        message_string = message_string + '%0aOrder Total : ' + str(order.currency_id.symbol) + '%20' + \
-                         str(order.amount_total) + '%0a%0a _Thank You_%20%0a%20'
+        message_string = message_string + '%0aTotal de la commande : ' + str(order.currency_id.symbol) + '%20' + \
+                         str(order.amount_total) + '%0a%0a _Merci_%20%0a%20'
         print("message_string",message_string)
         # order.unlink()
         return mobile_num, message_string
@@ -34,7 +34,7 @@ class WebsiteSale(WebsiteSale):
     def whatsapp_checkout(self, **post):
         print("1stttttt")
         mobile_num, message_string = self._get_checkout_data()
-        return request.redirect("https://web.whatsapp.com/send?phone=" + mobile_num + "&text=" + message_string)
+        return request.redirect("https://api.whatsapp.com/send?phone=" + mobile_num + "&text=" + message_string)
 
     @http.route(['/shop/whatsapp_checkout/api'], type='http', auth="public", website=True, sitemap=False)
     def whatsapp_checkout_api(self, **post):
